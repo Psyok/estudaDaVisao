@@ -1,213 +1,190 @@
-*, *::before, *::after {
+/* Configurações Globais com Suporte a Escala Relativa (rem) */
+html {
+    font-size: 100%; /* Default: 16px */
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
-@page {
-    size: A4;
-    margin: 20mm 18mm 20mm 22mm;
-    background-color: #ffffff;
-    @bottom-right {
-        content: "Página " counter(page) " de " counter(pages);
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 11pt;
-        color: #555555;
-    }
-    @bottom-left {
-        content: "Repositório estudoDaVisão — Relatório Científico";
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 11pt;
-        color: #555555;
-    }
+*, *::before, *::after {
+    box-sizing: inherit;
 }
 
 body {
     font-family: 'Times New Roman', Times, serif;
-    font-size: 13pt; /* Aumentado de 11pt para 13pt */
+    font-size: 1rem;
     line-height: 1.7;
     color: #1a1a1a;
-    margin: 0;
-    padding: 20px;
     background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* Centralização da página e contêiner principal */
+/* --- BARRA DE ACESSIBILIDADE --- */
+.barracao-acessibilidade {
+    background-color: #1a365d;
+    color: #ffffff;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.acessibilidade-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.acessibilidade-label {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.botoes-acessibilidade button {
+    background-color: #ffffff;
+    color: #1a365d;
+    border: 2px solid transparent;
+    padding: 6px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.botoes-acessibilidade button:hover,
+.botoes-acessibilidade button:focus {
+    background-color: #e2e8f0;
+    outline: 3px solid #2b6cb0;
+}
+
+/* --- CONTAINER PRINCIPAL --- */
 .main-container {
     max-width: 900px;
-    margin: 0 auto; /* Centraliza a folha na tela */
+    margin: 20px auto;
     background-color: #ffffff;
-    padding: 40px 50px;
+    padding: 40px;
+    border-radius: 6px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border-radius: 4px;
 }
 
-/* Header ABNT / Acadêmico */
 .doc-header {
     border-bottom: 2px solid #1a365d;
     padding-bottom: 16px;
     margin-bottom: 28px;
-    text-align: center; /* Centralizado */
+    text-align: center;
 }
 
 .repo-tag {
     font-family: Arial, sans-serif;
-    font-size: 10pt; /* Aumentado de 8pt */
+    font-size: 0.8rem;
     font-weight: bold;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
     color: #2b6cb0;
-    margin-bottom: 8px;
+    text-transform: uppercase;
 }
 
 h1 {
-    font-size: 22pt; /* Aumentado de 18pt */
+    font-size: 1.8rem;
     color: #1a365d;
-    margin: 0 0 12px 0;
-    line-height: 1.3;
-    font-weight: bold;
-    text-align: center; /* Centralizado */
+    margin: 10px 0;
 }
 
 .subtitle {
-    font-size: 13pt; /* Aumentado de 11pt */
     font-style: italic;
     color: #4a5568;
-    margin: 0 0 16px 0;
-    text-align: center; /* Centralizado */
 }
 
-.meta-info {
-    font-size: 11pt; /* Aumentado de 9.5pt */
-    color: #718096;
-    border-top: 1px solid #e2e8f0;
-    padding-top: 10px;
-    text-align: center; /* Centralizado */
-}
-
-/* Resumo / Abstract Box */
 .abstract-box {
     background-color: #f7fafc;
     border-left: 5px solid #2b6cb0;
     padding: 16px 20px;
-    margin: 24px 0 30px 0;
-    font-size: 11.5pt; /* Aumentado de 10pt */
-    text-align: justify;
+    margin: 24px 0;
 }
 
-.abstract-title {
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 11pt; /* Aumentado de 9pt */
-    color: #2b6cb0;
-    margin-bottom: 6px;
-    text-align: center; /* Centralizado */
+/* --- TABELA RESPONSIVA --- */
+.table-responsive {
+    overflow-x: auto;
 }
 
-.keywords {
-    margin-top: 12px;
-    font-weight: bold;
-    font-size: 11pt; /* Aumentado de 9.5pt */
-}
-
-/* Headings */
-h2 {
-    font-size: 15pt; /* Aumentado de 13pt */
-    color: #1a365d;
-    border-bottom: 2px solid #cbd5e0;
-    padding-bottom: 6px;
-    margin-top: 28px;
-    margin-bottom: 14px;
-    page-break-after: avoid;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    text-align: center; /* Centralizado */
-}
-
-h3 {
-    font-size: 13.5pt; /* Aumentado de 11.5pt */
-    color: #2c5282;
-    margin-top: 20px;
-    margin-bottom: 8px;
-    page-break-after: avoid;
-    text-align: center; /* Centralizado */
-}
-
-p {
-    margin: 0 0 12px 0;
-    text-align: justify;
-    text-indent: 1.5em;
-}
-
-p.no-indent {
-    text-indent: 0;
-}
-
-/* Data Tables */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 22px 0;
-    font-size: 11pt; /* Aumentado de 9.5pt */
-    page-break-inside: avoid;
+    margin: 20px 0;
+}
+
+th, td {
+    border: 1px solid #cbd5e0;
+    padding: 10px;
+    text-align: left;
 }
 
 th {
     background-color: #2b6cb0;
-    color: #ffffff;
-    font-weight: bold;
-    text-align: center; /* Centralizado */
-    padding: 10px 12px;
-    border: 1px solid #2b6cb0;
+    color: white;
 }
 
-td {
-    padding: 9px 12px;
-    border: 1px solid #e2e8f0;
-    vertical-align: top;
+/* --- ESTILO DE ALTO CONTRASTE --- */
+body.alto-contraste {
+    background-color: #000000 !important;
+    color: #ffff00 !important; /* Amarelo no preto para alto contraste */
 }
 
-tr:nth-child(even) {
-    background-color: #f7fafc;
+body.alto-contraste .main-container,
+body.alto-contraste .abstract-box {
+    background-color: #000000 !important;
+    color: #ffff00 !important;
+    border-color: #ffff00 !important;
 }
 
-/* Callout / Highlight box */
-.callout {
-    background-color: #ebf8ff;
-    border: 1px solid #bee3f8;
-    border-radius: 6px;
-    padding: 16px 20px;
-    margin: 20px 0;
-    font-size: 11.5pt; /* Aumentado de 10pt */
-    page-break-inside: avoid;
+body.alto-contraste h1, 
+body.alto-contraste h2, 
+body.alto-contraste .repo-tag,
+body.alto-contraste .subtitle {
+    color: #ffffff !important;
 }
 
-.callout-title {
-    font-weight: bold;
-    color: #2b6cb0;
-    margin-bottom: 6px;
-    text-align: center; /* Centralizado */
+body.alto-contraste th {
+    background-color: #ffffff !important;
+    color: #000000 !important;
 }
 
-ul, ol {
-    margin: 0 0 16px 0;
-    padding-left: 28px;
+body.alto-contraste td, 
+body.alto-contraste table {
+    border-color: #ffffff !important;
 }
 
-li {
-    margin-bottom: 6px;
-    text-align: justify;
+body.alto-contraste .barracao-acessibilidade {
+    background-color: #1a1a1a;
+    border-bottom: 2px solid #ffff00;
 }
 
-/* References */
-.references {
-    font-size: 11pt; /* Aumentado de 9.5pt */
-    margin-top: 36px;
-    border-top: 2px solid #1a365d;
-    padding-top: 16px;
+body.alto-contraste .botoes-acessibilidade button {
+    background-color: #ffff00;
+    color: #000000;
+    border: 2px solid #ffffff;
 }
 
-.ref-item {
-    margin-bottom: 10px;
-    text-indent: -1.5em;
-    padding-left: 1.5em;
-    text-align: left;
+/* --- MEDIA QUERIES (RESPONSIVIDADE) --- */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .acessibilidade-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .botoes-acessibilidade {
+        display: flex;
+        justify-content: space-between;
+    }
 }
