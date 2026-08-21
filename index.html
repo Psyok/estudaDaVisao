@@ -11,15 +11,15 @@
     <!-- BARRA DE ACESSIBILIDADE FIXA NO TOPO -->
     <header class="barracao-acessibilidade" role="banner">
         <div class="acessibilidade-container">
-            <span class="acessibilidade-label">Acessibilidade:</span>
-            <div class="botoes-acessibilidade" role="toolbar" aria-label="Opções de Acessibilidade">
-                <button id="btn-contraste" aria-pressed="false" aria-label="Alternar Alto Contraste">
+            <span class="acessibilidade-label" id="label-acessibilidade">Acessibilidade:</span>
+            <div class="botoes-acessibilidade" role="toolbar" aria-labelledby="label-acessibilidade">
+                <button type="button" id="btn-contraste" aria-pressed="false" aria-label="Alternar Alto Contraste">
                     🌗 Alto Contraste
                 </button>
-                <button id="btn-aumentar-texto" aria-label="Aumentar tamanho do texto">
+                <button type="button" id="btn-aumentar-texto" aria-label="Aumentar tamanho do texto">
                     A+
                 </button>
-                <button id="btn-diminuir-texto" aria-label="Diminuir tamanho do texto">
+                <button type="button" id="btn-diminuir-texto" aria-label="Diminuir tamanho do texto">
                     A-
                 </button>
             </div>
@@ -28,7 +28,7 @@
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-container" id="conteudo-principal">
-        <div class="doc-header">
+        <header class="doc-header">
             <div class="repo-tag">REPOSITÓRIO: estudoDaVisão | MÓDULO DE PATOLOGIAS E ÓTICA OCULAR</div>
             <h1>O Impacto do Glaucoma na Visão: Fisiopatologia e Alterações no Campo Visual</h1>
             <div class="subtitle">Análise da dinâmica dos fluidos intraoculares, danos ao nervo ótico e reflexos na acuidade visual periférica</div>
@@ -37,10 +37,10 @@
                 <strong>Formato:</strong> Artigo Técnico-Científico &nbsp;|&nbsp; 
                 <strong>Data:</strong> Julho de 2026
             </div>
-        </div>
+        </header>
 
         <section class="abstract-box" aria-label="Resumo do Artigo">
-            <div class="abstract-title">Resumo / Abstract</div>
+            <h2 class="abstract-title">Resumo / Abstract</h2>
             <p class="no-indent">
                 Este relatório aborda a fisiopatologia do glaucoma, uma neuropatia ótica progressiva frequentemente associada à elevação da pressão intraocular (PIO). O estudo detalha a dinâmica do humor aquoso, os mecanismos de dano às células ganglionares da retina e a subsequente escavação do disco ótico. O artigo categoriza os principais tipos de glaucoma (ângulo aberto e ângulo fechado) e explora o seu impacto no campo visual do paciente, desde a perda de visão periférica até à cegueira irreversível. Discutem-se também os métodos diagnósticos e as abordagens terapêuticas disponíveis na oftalmologia moderna para a estabilização da doença.
             </p>
@@ -115,12 +115,12 @@
             </p>
             <ol>
                 <li><strong>Fase Inicial:</strong> Surgem pequenos escotomas (pontos cegos) na periferia do campo de visão, frequentemente impercetíveis no dia a dia devido à compensação visual feita pelo outro olho e pelo cérebro.</li>
-                <li><strong>Fase Intermediária:</strong> Os escotomas coalescem, formando áreas arqueadas de cegueira periférica. O paciente começa a esbarrar em objetos laterais.</li>
+                <li><strong>Fase Intermediária:</strong> Os escotomas coalescem, forming áreas arqueadas de cegueira periférica. O paciente começa a esbarrar em objetos laterais.</li>
                 <li><strong>Fase Avançada (Visão Tubular):</strong> O campo visual reduz-se a uma pequena ilha central de visão, assemelhando-se à sensação de olhar através de um tubo estreito.</li>
                 <li><strong>Fase Terminal:</strong> Destruição total das fibras nervosas, culminando em amaurose (cegueira total).</li>
             </ol>
 
-            <div class="callout">
+            <aside class="callout" aria-label="Métodos Diagnósticos">
                 <div class="callout-title">🔬 Métodos Diagnósticos na Prática Oftalmológica</div>
                 <p class="no-indent">
                     A prevenção da cegueira por glaucoma depende do diagnóstico precoce. Os principais exames incluem:
@@ -129,7 +129,7 @@
                     <br>• <strong>Campimetria (Campo Visual):</strong> Mapeamento computorizado da visão periférica e central.
                     <br>• <strong>Tomografia de Coerência Ótica (OCT):</strong> Exame de alta resolução que mede a espessura da camada de fibras nervosas da retina, detetando danos microscópicos antes que haja perda de campo visual.
                 </p>
-            </div>
+            </aside>
         </section>
 
         <section>
@@ -139,14 +139,14 @@
             </p>
         </section>
 
-        <div class="references">
+        <footer class="references">
             <h3>Referências Bibliográficas</h3>
             <div class="ref-item">AMERICAN ACADEMY OF OPHTHALMOLOGY (AAO). <em>Glaucoma: Basic and Clinical Science Course</em>. São Francisco, CA, 2023.</div>
             <div class="ref-item">KANSKI, J. J.; BOWLING, B. <em>Oftalmologia Clínica: Uma Abordagem Sistemática</em>. 8. ed. Rio de Janeiro: Elsevier, 2016.</div>
             <div class="ref-item">WEINREB, R. N.; AUNG, T.; MEDEIROS, F. A. The pathophysiology and treatment of glaucoma: a review. <em>JAMA</em>, v. 311, n. 18, p. 1901-1911, 2014.</div>
-        </div>
+        </footer>
     </main>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
