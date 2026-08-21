@@ -1,15 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Seleção dos elementos da barra de acessibilidade
     const btnContraste = document.getElementById("btn-contraste");
     const btnAumentar = document.getElementById("btn-aumentar-texto");
     const btnDiminuir = document.getElementById("btn-diminuir-texto");
 
-    // Configurações da escala de texto
     const PASSO = 10;
     const MIN_FONTE = 80;
     const MAX_FONTE = 150;
 
-    // Métodos seguros para localStorage (evita erros em ambientes restritos/file://)
+    // Função de leitura com proteção contra restrições no localStorage
     const obterItemSalvo = (chave) => {
         try {
             return localStorage.getItem(chave);
@@ -18,15 +16,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // Função de escrita com proteção contra erros em navegadores ou arquivos locais
     const salvarItem = (chave, valor) => {
         try {
             localStorage.setItem(chave, valor);
         } catch (erro) {
-            // Ignora o erro se o armazenamento estiver bloqueado pelo navegador
+            // Ignora a exceção caso a escrita seja bloqueada
         }
     };
 
-    // --- CONTROLE DE TAMANHO DA FONTE ---
+    // --- ESCALA DE TAMANHO DA FONTE ---
     let tamanhoAtual = parseInt(obterItemSalvo("tamanhoFonte"), 10) || 100;
 
     const aplicarTamanhoFonte = (novoTamanho) => {
@@ -35,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         salvarItem("tamanhoFonte", tamanhoAtual.toString());
     };
 
-    // Aplica o tamanho salvo na inicialização
+    // Aplica a preferência de tamanho ao iniciar
     aplicarTamanhoFonte(tamanhoAtual);
 
     if (btnAumentar) {
@@ -50,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- CONTROLE DE ALTO CONTRASTE ---
+    // --- MODO ALTO CONTRASTE ---
     const contrasteAtivo = obterItemSalvo("altoContraste") === "true";
 
     const aplicarContraste = (ativo) => {
@@ -61,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         salvarItem("altoContraste", ativo.toString());
     };
 
-    // Aplica o estado de contraste salvo na inicialização
+    // Aplica o alto contraste ao iniciar, caso esteja salvo como ativo
     if (contrasteAtivo) {
         aplicarContraste(true);
     }

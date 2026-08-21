@@ -1,6 +1,6 @@
 /* --- CONFIGURAÇÕES GLOBAIS --- */
 html {
-    font-size: 100%; /* Permite ajuste proporcional em 'rem' via JS */
+    font-size: 100%;
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
@@ -141,7 +141,7 @@ section ul, section ol {
     padding-left: 1.5rem;
 }
 
-/* --- CAIXAS ESPECIAIS (ABSTRACT & CALLOUT) --- */
+/* --- CAIXAS ESPECIAIS --- */
 .abstract-box {
     background-color: #f7fafc;
     border-left: 5px solid #2b6cb0;
