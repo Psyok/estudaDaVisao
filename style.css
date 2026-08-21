@@ -1,6 +1,6 @@
 /* --- CONFIGURAÇÕES GLOBAIS --- */
 html {
-    font-size: 100%;
+    font-size: 100%; /* Permite redimensionamento relativo via JS */
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
@@ -17,7 +17,7 @@ body {
     background-color: #f4f6f9;
     margin: 0;
     padding: 0;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 /* --- BARRA DE ACESSIBILIDADE FIXA --- */
@@ -216,7 +216,7 @@ th {
     text-indent: -1.5rem;
 }
 
-/* --- MODO ALTO CONTRASTE --- */
+/* --- MODO ALTO CONTRASTE (WCAG AAA Compliance) --- */
 body.alto-contraste {
     background-color: #000000 !important;
     color: #ffffff !important;
@@ -228,7 +228,7 @@ body.alto-contraste .callout {
     background-color: #000000 !important;
     color: #ffffff !important;
     border-color: #ffff00 !important;
-    box-shadow: none;
+    box-shadow: none !important;
 }
 
 body.alto-contraste h1, 
@@ -250,7 +250,7 @@ body.alto-contraste .keywords {
 body.alto-contraste th {
     background-color: #ffff00 !important;
     color: #000000 !important;
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 body.alto-contraste td, 
@@ -260,8 +260,8 @@ body.alto-contraste table {
 }
 
 body.alto-contraste .barracao-acessibilidade {
-    background-color: #121212;
-    border-bottom: 2px solid #ffff00;
+    background-color: #121212 !important;
+    border-bottom: 2px solid #ffff00 !important;
 }
 
 body.alto-contraste .botoes-acessibilidade button {
@@ -271,7 +271,9 @@ body.alto-contraste .botoes-acessibilidade button {
 }
 
 body.alto-contraste .botoes-acessibilidade button[aria-pressed="true"] {
-    outline: 3px solid #ffffff;
+    outline: 3px solid #ffffff !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
 }
 
 /* --- RESPONSIVIDADE --- */

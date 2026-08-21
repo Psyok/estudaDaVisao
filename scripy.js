@@ -1,40 +1,40 @@
-document.addEventListener("DOMContentLoaded", () => {
+function inicializarAcessibilidade() {
     const btnContraste = document.getElementById("btn-contraste");
     const btnAumentar = document.getElementById("btn-aumentar-texto");
     const btnDiminuir = document.getElementById("btn-diminuir-texto");
 
     const PASSO = 10;
     const MIN_FONTE = 80;
-    const MAX_FONTE = 150;
+    const MAX_FONTE = 160;
 
-    // Função de leitura com proteção contra restrições no localStorage
-    const obterItemSalvo = (chave) => {
+    // Leitura do localStorage com tratamento de erros (impede travamento se bloqueado)
+    function lerStorage(chave) {
         try {
             return localStorage.getItem(chave);
-        } catch (erro) {
+        } catch (e) {
             return null;
         }
-    };
+    }
 
-    // Função de escrita com proteção contra erros em navegadores ou arquivos locais
-    const salvarItem = (chave, valor) => {
+    // Gravação no localStorage com tratamento de erros
+    function salvarStorage(chave, valor) {
         try {
             localStorage.setItem(chave, valor);
-        } catch (erro) {
-            // Ignora a exceção caso a escrita seja bloqueada
+        } catch (e) {
+            // Ignora se a gravação for negada pelo navegador
         }
-    };
+    }
 
     // --- ESCALA DE TAMANHO DA FONTE ---
-    let tamanhoAtual = parseInt(obterItemSalvo("tamanhoFonte"), 10) || 100;
+    let tamanhoAtual = parseInt(lerStorage("tamanhoFonte"), 10) || 100;
 
-    const aplicarTamanhoFonte = (novoTamanho) => {
+    function aplicarTamanhoFonte(novoTamanho) {
         tamanhoAtual = Math.min(Math.max(novoTamanho, MIN_FONTE), MAX_FONTE);
         document.documentElement.style.fontSize = `${tamanhoAtual}%`;
-        salvarItem("tamanhoFonte", tamanhoAtual.toString());
-    };
+        salvarStorage("tamanhoFonte", tamanhoAtual.toString());
+    }
 
-    // Aplica a preferência de tamanho ao iniciar
+    // Aplica o tamanho de fonte inicial ao carregar a página
     aplicarTamanhoFonte(tamanhoAtual);
 
     if (btnAumentar) {
@@ -50,25 +50,37 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- MODO ALTO CONTRASTE ---
-    const contrasteAtivo = obterItemSalvo("altoContraste") === "true";
+    const contrasteSalvo = lerStorage("altoContraste") === "true";
 
-    const aplicarContraste = (ativo) => {
-        document.body.classList.toggle("alto-contraste", ativo);
-        if (btnContraste) {
-            btnContraste.setAttribute("aria-pressed", ativo.toString());
+    function aplicarContraste(ativo) {
+        if (ativo) {
+            document.body.classList.add("alto-contraste");
+        } else {
+            document.body.classList.remove("alto-contraste");
         }
-        salvarItem("altoContraste", ativo.toString());
-    };
 
-    // Aplica o alto contraste ao iniciar, caso esteja salvo como ativo
-    if (contrasteAtivo) {
+        if (btnContraste) {
+            btnContraste.setAttribute("aria-pressed", ativo ? "true" : "false");
+        }
+        salvarStorage("altoContraste", ativo ? "true" : "false");
+    }
+
+    // Aplica o contraste inicial se houver preferência salva
+    if (contrasteSalvo) {
         aplicarContraste(true);
     }
 
     if (btnContraste) {
         btnContraste.addEventListener("click", () => {
-            const estadoAtual = document.body.classList.contains("alto-contraste");
-            aplicarContraste(!estadoAtual);
+            const estaAtivo = document.body.classList.contains("alto-contraste");
+            aplicarContraste(!estaAtivo);
         });
     }
-});
+}
+
+// Garante a execução independentemente de como o script foi carregado
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", inicializarAcessibilidade);
+} else {
+    inicializarAcessibilidade();
+}
