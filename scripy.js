@@ -1,71 +1,75 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Seleção dos elementos da barra de acessibilidade
     const btnContraste = document.getElementById("btn-contraste");
     const btnAumentar = document.getElementById("btn-aumentar-texto");
     const btnDiminuir = document.getElementById("btn-diminuir-texto");
 
+    // Configurações da escala de texto
     const PASSO = 10;
-    const MAX_FONTE = 150;
     const MIN_FONTE = 80;
+    const MAX_FONTE = 150;
 
-    // Leitura e escrita seguras para evitar travamento em arquivos locais ou iframes
-    function lerArmazenamento(chave) {
+    // Métodos seguros para localStorage (evita erros em ambientes restritos/file://)
+    const obterItemSalvo = (chave) => {
         try {
             return localStorage.getItem(chave);
-        } catch (e) {
+        } catch (erro) {
             return null;
         }
-    }
+    };
 
-    function salvarArmazenamento(chave, valor) {
+    const salvarItem = (chave, valor) => {
         try {
             localStorage.setItem(chave, valor);
-        } catch (e) {
-            // Ignora o bloqueio de gravação sem interromper o script
+        } catch (erro) {
+            // Ignora o erro se o armazenamento estiver bloqueado pelo navegador
         }
-    }
+    };
 
-    // Aplicação do tamanho inicial do texto
-    let tamanhoAtual = parseInt(lerArmazenamento("tamanhoFonte")) || 100;
-    
-    function atualizarFonte(novoTamanho) {
-        tamanhoAtual = novoTamanho;
+    // --- CONTROLE DE TAMANHO DA FONTE ---
+    let tamanhoAtual = parseInt(obterItemSalvo("tamanhoFonte"), 10) || 100;
+
+    const aplicarTamanhoFonte = (novoTamanho) => {
+        tamanhoAtual = Math.min(Math.max(novoTamanho, MIN_FONTE), MAX_FONTE);
         document.documentElement.style.fontSize = `${tamanhoAtual}%`;
-        salvarArmazenamento("tamanhoFonte", tamanhoAtual);
-    }
+        salvarItem("tamanhoFonte", tamanhoAtual.toString());
+    };
 
-    atualizarFonte(tamanhoAtual);
+    // Aplica o tamanho salvo na inicialização
+    aplicarTamanhoFonte(tamanhoAtual);
 
-    // Aplicação do estado de alto contraste inicial
-    const contrasteAtivo = lerArmazenamento("altoContraste") === "true";
-    if (contrasteAtivo) {
-        document.body.classList.add("alto-contraste");
-        if (btnContraste) btnContraste.setAttribute("aria-pressed", "true");
-    }
-
-    // --- EVENTO 1: ALTO CONTRASTE ---
-    if (btnContraste) {
-        btnContraste.addEventListener("click", () => {
-            const estaAtivo = document.body.classList.toggle("alto-contraste");
-            btnContraste.setAttribute("aria-pressed", estaAtivo.toString());
-            salvarArmazenamento("altoContraste", estaAtivo);
-        });
-    }
-
-    // --- EVENTO 2: AUMENTAR FONTE ---
     if (btnAumentar) {
         btnAumentar.addEventListener("click", () => {
-            if (tamanhoAtual < MAX_FONTE) {
-                atualizarFonte(tamanhoAtual + PASSO);
-            }
+            aplicarTamanhoFonte(tamanhoAtual + PASSO);
         });
     }
 
-    // --- EVENTO 3: DIMINUIR FONTE ---
     if (btnDiminuir) {
         btnDiminuir.addEventListener("click", () => {
-            if (tamanhoAtual > MIN_FONTE) {
-                atualizarFonte(tamanhoAtual - PASSO);
-            }
+            aplicarTamanhoFonte(tamanhoAtual - PASSO);
+        });
+    }
+
+    // --- CONTROLE DE ALTO CONTRASTE ---
+    const contrasteAtivo = obterItemSalvo("altoContraste") === "true";
+
+    const aplicarContraste = (ativo) => {
+        document.body.classList.toggle("alto-contraste", ativo);
+        if (btnContraste) {
+            btnContraste.setAttribute("aria-pressed", ativo.toString());
+        }
+        salvarItem("altoContraste", ativo.toString());
+    };
+
+    // Aplica o estado de contraste salvo na inicialização
+    if (contrasteAtivo) {
+        aplicarContraste(true);
+    }
+
+    if (btnContraste) {
+        btnContraste.addEventListener("click", () => {
+            const estadoAtual = document.body.classList.contains("alto-contraste");
+            aplicarContraste(!estadoAtual);
         });
     }
 });
