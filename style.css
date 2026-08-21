@@ -1,6 +1,6 @@
-/* Configurações Globais com Suporte a Escala Relativa (rem) */
+/* --- CONFIGURAÇÕES GLOBAIS --- */
 html {
-    font-size: 100%; /* Default: 16px */
+    font-size: 100%; /* Permite ajuste proporcional em 'rem' via JS */
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
@@ -20,7 +20,7 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* --- BARRA DE ACESSIBILIDADE --- */
+/* --- BARRA DE ACESSIBILIDADE FIXA --- */
 .barracao-acessibilidade {
     background-color: #1a365d;
     color: #ffffff;
@@ -47,6 +47,11 @@ body {
     font-size: 0.9rem;
 }
 
+.botoes-acessibilidade {
+    display: flex;
+    gap: 8px;
+}
+
 .botoes-acessibilidade button {
     background-color: #ffffff;
     color: #1a365d;
@@ -60,12 +65,12 @@ body {
 }
 
 .botoes-acessibilidade button:hover,
-.botoes-acessibilidade button:focus {
+.botoes-acessibilidade button:focus-visible {
     background-color: #e2e8f0;
     outline: 3px solid #2b6cb0;
 }
 
-/* --- CONTAINER PRINCIPAL --- */
+/* --- CONTAINER E TIPOGRAFIA PRINCIPAL --- */
 .main-container {
     max-width: 900px;
     margin: 20px auto;
@@ -96,11 +101,47 @@ h1 {
     margin: 10px 0;
 }
 
+h2 {
+    font-size: 1.3rem;
+    color: #1a365d;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 6px;
+    margin-top: 28px;
+}
+
+h3 {
+    font-size: 1.1rem;
+    color: #2b6cb0;
+}
+
 .subtitle {
     font-style: italic;
     color: #4a5568;
+    margin-bottom: 8px;
 }
 
+.meta-info {
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    color: #718096;
+}
+
+.no-indent {
+    text-indent: 0 !important;
+}
+
+section p {
+    text-align: justify;
+    text-indent: 1.5em;
+    margin-bottom: 1rem;
+}
+
+section ul, section ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+/* --- CAIXAS ESPECIAIS (ABSTRACT & CALLOUT) --- */
 .abstract-box {
     background-color: #f7fafc;
     border-left: 5px solid #2b6cb0;
@@ -108,70 +149,132 @@ h1 {
     margin: 24px 0;
 }
 
-/* --- TABELA RESPONSIVA --- */
+.abstract-title {
+    font-weight: bold;
+    color: #1a365d;
+    margin-bottom: 8px;
+    font-family: Arial, sans-serif;
+}
+
+.keywords {
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    color: #4a5568;
+    margin-top: 12px;
+    font-style: italic;
+}
+
+.callout {
+    background-color: #ebf8ff;
+    border-left: 5px solid #3182ce;
+    padding: 16px 20px;
+    margin: 24px 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.callout-title {
+    font-weight: bold;
+    color: #2b6cb0;
+    margin-bottom: 8px;
+    font-family: Arial, sans-serif;
+}
+
+/* --- TABELAS --- */
 .table-responsive {
     overflow-x: auto;
+    margin: 20px 0;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
 }
 
 th, td {
     border: 1px solid #cbd5e0;
-    padding: 10px;
+    padding: 12px;
     text-align: left;
 }
 
 th {
     background-color: #2b6cb0;
-    color: white;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
 }
 
-/* --- ESTILO DE ALTO CONTRASTE --- */
+/* --- REFERÊNCIAS --- */
+.references {
+    margin-top: 40px;
+    border-top: 2px solid #e2e8f0;
+    padding-top: 20px;
+}
+
+.ref-item {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    padding-left: 1.5rem;
+    text-indent: -1.5rem;
+}
+
+/* --- MODO ALTO CONTRASTE --- */
 body.alto-contraste {
     background-color: #000000 !important;
-    color: #ffff00 !important; /* Amarelo no preto para alto contraste */
+    color: #ffffff !important;
 }
 
 body.alto-contraste .main-container,
-body.alto-contraste .abstract-box {
+body.alto-contraste .abstract-box,
+body.alto-contraste .callout {
     background-color: #000000 !important;
-    color: #ffff00 !important;
+    color: #ffffff !important;
     border-color: #ffff00 !important;
+    box-shadow: none;
 }
 
 body.alto-contraste h1, 
 body.alto-contraste h2, 
+body.alto-contraste h3,
 body.alto-contraste .repo-tag,
-body.alto-contraste .subtitle {
-    color: #ffffff !important;
+body.alto-contraste .abstract-title,
+body.alto-contraste .callout-title,
+body.alto-contraste strong {
+    color: #ffff00 !important;
+}
+
+body.alto-contraste .subtitle,
+body.alto-contraste .meta-info,
+body.alto-contraste .keywords {
+    color: #e2e8f0 !important;
 }
 
 body.alto-contraste th {
-    background-color: #ffffff !important;
+    background-color: #ffff00 !important;
     color: #000000 !important;
+    font-weight: bold;
 }
 
 body.alto-contraste td, 
 body.alto-contraste table {
-    border-color: #ffffff !important;
+    border-color: #ffff00 !important;
+    color: #ffffff !important;
 }
 
 body.alto-contraste .barracao-acessibilidade {
-    background-color: #1a1a1a;
+    background-color: #121212;
     border-bottom: 2px solid #ffff00;
 }
 
 body.alto-contraste .botoes-acessibilidade button {
-    background-color: #ffff00;
-    color: #000000;
-    border: 2px solid #ffffff;
+    background-color: #ffff00 !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
 }
 
-/* --- MEDIA QUERIES (RESPONSIVIDADE) --- */
+body.alto-contraste .botoes-acessibilidade button[aria-pressed="true"] {
+    outline: 3px solid #ffffff;
+}
+
+/* --- RESPONSIVIDADE --- */
 @media (max-width: 768px) {
     .main-container {
         padding: 20px;
@@ -184,7 +287,6 @@ body.alto-contraste .botoes-acessibilidade button {
     }
 
     .botoes-acessibilidade {
-        display: flex;
         justify-content: space-between;
     }
 }
