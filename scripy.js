@@ -1,86 +1,133 @@
-function inicializarAcessibilidade() {
-    const btnContraste = document.getElementById("btn-contraste");
-    const btnAumentar = document.getElementById("btn-aumentar-texto");
-    const btnDiminuir = document.getElementById("btn-diminuir-texto");
+/* ==============================
+   CONFIGURAÇÃO INICIAL
+============================== */
 
-    const PASSO = 10;
-    const MIN_FONTE = 80;
-    const MAX_FONTE = 160;
+let tamanhoFonte = 100;
 
-    // Leitura do localStorage com tratamento de erros (impede travamento se bloqueado)
-    function lerStorage(chave) {
-        try {
-            return localStorage.getItem(chave);
-        } catch (e) {
-            return null;
-        }
-    }
+const tamanhoMinimo = 80;
+const tamanhoMaximo = 140;
+const incremento = 10;
 
-    // Gravação no localStorage com tratamento de erros
-    function salvarStorage(chave, valor) {
-        try {
-            localStorage.setItem(chave, valor);
-        } catch (e) {
-            // Ignora se a gravação for negada pelo navegador
-        }
-    }
 
-    // --- ESCALA DE TAMANHO DA FONTE ---
-    let tamanhoAtual = parseInt(lerStorage("tamanhoFonte"), 10) || 100;
+/* ==============================
+   AUMENTAR FONTE
+============================== */
 
-    function aplicarTamanhoFonte(novoTamanho) {
-        tamanhoAtual = Math.min(Math.max(novoTamanho, MIN_FONTE), MAX_FONTE);
-        document.documentElement.style.fontSize = `${tamanhoAtual}%`;
-        salvarStorage("tamanhoFonte", tamanhoAtual.toString());
-    }
+function aumentarFonte() {
 
-    // Aplica o tamanho de fonte inicial ao carregar a página
-    aplicarTamanhoFonte(tamanhoAtual);
+    if (tamanhoFonte < tamanhoMaximo) {
 
-    if (btnAumentar) {
-        btnAumentar.addEventListener("click", () => {
-            aplicarTamanhoFonte(tamanhoAtual + PASSO);
-        });
-    }
+        tamanhoFonte += incremento;
 
-    if (btnDiminuir) {
-        btnDiminuir.addEventListener("click", () => {
-            aplicarTamanhoFonte(tamanhoAtual - PASSO);
-        });
-    }
-
-    // --- MODO ALTO CONTRASTE ---
-    const contrasteSalvo = lerStorage("altoContraste") === "true";
-
-    function aplicarContraste(ativo) {
-        if (ativo) {
-            document.body.classList.add("alto-contraste");
-        } else {
-            document.body.classList.remove("alto-contraste");
-        }
-
-        if (btnContraste) {
-            btnContraste.setAttribute("aria-pressed", ativo ? "true" : "false");
-        }
-        salvarStorage("altoContraste", ativo ? "true" : "false");
-    }
-
-    // Aplica o contraste inicial se houver preferência salva
-    if (contrasteSalvo) {
-        aplicarContraste(true);
-    }
-
-    if (btnContraste) {
-        btnContraste.addEventListener("click", () => {
-            const estaAtivo = document.body.classList.contains("alto-contraste");
-            aplicarContraste(!estaAtivo);
-        });
+        document.documentElement.style.fontSize =
+            tamanhoFonte + "%";
     }
 }
 
-// Garante a execução independentemente de como o script foi carregado
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", inicializarAcessibilidade);
-} else {
-    inicializarAcessibilidade();
+
+/* ==============================
+   DIMINUIR FONTE
+============================== */
+
+function diminuirFonte() {
+
+    if (tamanhoFonte > tamanhoMinimo) {
+
+        tamanhoFonte -= incremento;
+
+        document.documentElement.style.fontSize =
+            tamanhoFonte + "%";
+    }
 }
+
+
+/* ==============================
+   ALTO CONTRASTE
+============================== */
+
+function contraste() {
+
+    const corpo = document.body;
+    const botao = document.getElementById("botaoContraste");
+
+    corpo.classList.toggle("alto-contraste");
+
+    const contrasteAtivo =
+        corpo.classList.contains("alto-contraste");
+
+    botao.setAttribute(
+        "aria-pressed",
+        contrasteAtivo
+    );
+
+    botao.setAttribute(
+        "aria-label",
+        contrasteAtivo
+            ? "Desativar modo de alto contraste"
+            : "Ativar modo de alto contraste"
+    );
+}
+
+
+/* ==============================
+   RESTAURAR CONFIGURAÇÕES
+============================== */
+
+function resetar() {
+
+    tamanhoFonte = 100;
+
+    document.documentElement.style.fontSize = "100%";
+
+    document.body.classList.remove("alto-contraste");
+
+    const botao = document.getElementById("botaoContraste");
+
+    if (botao) {
+
+        botao.setAttribute(
+            "aria-pressed",
+            "false"
+        );
+
+        botao.setAttribute(
+            "aria-label",
+            "Ativar modo de alto contraste"
+        );
+    }
+}
+
+
+/* ==============================
+   ATALHOS DO TECLADO
+============================== */
+
+document.addEventListener("keydown", function (event) {
+
+    /* Ctrl + + → aumentar fonte */
+    if (event.ctrlKey && (event.key === "+" || event.key === "=")) {
+
+        event.preventDefault();
+
+        aumentarFonte();
+    }
+
+
+    /* Ctrl + - → diminuir fonte */
+    if (event.ctrlKey && event.key === "-") {
+
+        event.preventDefault();
+
+        diminuirFonte();
+    }
+
+
+    /* Ctrl + 0 → restaurar */
+    if (event.ctrlKey && event.key === "0") {
+
+        event.preventDefault();
+
+        resetar();
+    }
+
+});

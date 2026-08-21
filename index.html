@@ -3,150 +3,737 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudo da Visão: O Impacto do Glaucoma</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Documento Acadêmico Acessível</title>
+
+    <style>
+        /* ==============================
+           CONFIGURAÇÕES GERAIS
+        ============================== */
+
+        html {
+            font-size: 100%;
+            scroll-behavior: smooth;
+            box-sizing: border-box;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #202124;
+            background: #eef3f8;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ==============================
+           BARRA DE ACESSIBILIDADE
+        ============================== */
+
+        .acessibilidade {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #12355b;
+            color: white;
+            padding: 12px 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .acessibilidade-conteudo {
+            max-width: 1000px;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .acessibilidade-titulo {
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .botoes button {
+            border: 2px solid transparent;
+            border-radius: 5px;
+            background: white;
+            color: #12355b;
+            padding: 7px 13px;
+            font-family: Arial, sans-serif;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .botoes button:hover {
+            background: #dbeafe;
+            transform: translateY(-1px);
+        }
+
+        .botoes button:focus-visible {
+            outline: 3px solid #ffd43b;
+            outline-offset: 2px;
+        }
+
+        /* ==============================
+           CONTEÚDO PRINCIPAL
+        ============================== */
+
+        .pagina {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .documento {
+            background: white;
+            padding: 45px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ==============================
+           CABEÇALHO
+        ============================== */
+
+        .cabecalho {
+            text-align: center;
+            border-bottom: 3px solid #1d4e89;
+            padding-bottom: 22px;
+            margin-bottom: 30px;
+        }
+
+        .identificacao {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            background: #e8f1fb;
+            color: #1d4e89;
+
+            font-family: Arial, sans-serif;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            color: #12355b;
+            font-size: 2rem;
+            line-height: 1.3;
+            margin: 15px 0 10px;
+        }
+
+        .subtitulo {
+            color: #5c6773;
+            font-style: italic;
+            font-size: 1rem;
+        }
+
+        .informacoes {
+            color: #707b87;
+            font-family: Arial, sans-serif;
+            font-size: 0.8rem;
+        }
+
+        /* ==============================
+           SEÇÕES
+        ============================== */
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #12355b;
+            font-size: 1.35rem;
+            border-left: 5px solid #3182ce;
+            padding-left: 12px;
+            margin-top: 30px;
+        }
+
+        h3 {
+            color: #2563a6;
+            font-size: 1.1rem;
+        }
+
+        p {
+            text-align: justify;
+            text-indent: 1.5em;
+            margin-bottom: 1rem;
+        }
+
+        .sem-recuo {
+            text-indent: 0;
+        }
+
+        ul,
+        ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+
+        /* ==============================
+           RESUMO
+        ============================== */
+
+        .resumo {
+            background: #f1f7fc;
+            border: 1px solid #cbdff2;
+            border-radius: 8px;
+            padding: 22px;
+            margin: 25px 0;
+        }
+
+        .resumo-titulo {
+            color: #12355b;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .palavras-chave {
+            margin-top: 15px;
+            font-family: Arial, sans-serif;
+            font-size: 0.85rem;
+            color: #52606d;
+        }
+
+        /* ==============================
+           DESTAQUE
+        ============================== */
+
+        .destaque {
+            margin: 25px 0;
+            padding: 20px;
+            background: #edf7ff;
+            border-radius: 8px;
+            border-left: 6px solid #3182ce;
+        }
+
+        .destaque strong {
+            color: #1d4e89;
+            font-family: Arial, sans-serif;
+        }
+
+        /* ==============================
+           TABELA
+        ============================== */
+
+        .tabela-container {
+            overflow-x: auto;
+            margin: 25px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 500px;
+        }
+
+        th,
+        td {
+            border: 1px solid #c8d2dc;
+            padding: 12px;
+        }
+
+        th {
+            background: #2563a6;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        tr:nth-child(even) {
+            background: #f7f9fb;
+        }
+
+        /* ==============================
+           REFERÊNCIAS
+        ============================== */
+
+        .referencias {
+            border-top: 2px solid #d9e2ec;
+            padding-top: 20px;
+            margin-top: 40px;
+        }
+
+        .referencia {
+            font-size: 0.9rem;
+            padding-left: 25px;
+            text-indent: -25px;
+            margin-bottom: 10px;
+        }
+
+        /* ==============================
+           ALTO CONTRASTE
+        ============================== */
+
+        body.alto-contraste {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        body.alto-contraste .documento,
+        body.alto-contraste .resumo,
+        body.alto-contraste .destaque {
+            background: #000 !important;
+            color: #fff !important;
+            box-shadow: none;
+        }
+
+        body.alto-contraste h1,
+        body.alto-contraste h2,
+        body.alto-contraste h3,
+        body.alto-contraste .resumo-titulo,
+        body.alto-contraste .destaque strong {
+            color: #ffff00 !important;
+        }
+
+        body.alto-contraste .cabecalho {
+            border-color: #ffff00;
+        }
+
+        body.alto-contraste .identificacao {
+            background: #ffff00;
+            color: #000;
+        }
+
+        body.alto-contraste .subtitulo,
+        body.alto-contraste .informacoes,
+        body.alto-contraste .palavras-chave {
+            color: #fff !important;
+        }
+
+        body.alto-contraste .acessibilidade {
+            background: #111;
+            border-bottom: 2px solid #ffff00;
+        }
+
+        body.alto-contraste .botoes button {
+            background: #ffff00;
+            color: #000;
+            border-color: #fff;
+        }
+
+        body.alto-contraste th {
+            background: #ffff00;
+            color: #000;
+        }
+
+        body.alto-contraste td,
+        body.alto-contraste table {
+            border-color: #ffff00;
+        }
+
+        body.alto-contraste tr:nth-child(even) {
+            background: #000;
+        }
+
+        /* ==============================
+           RESPONSIVIDADE
+        ============================== */
+
+        @media (max-width: 700px) {
+
+            .acessibilidade-conteudo {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .acessibilidade-titulo {
+                text-align: center;
+            }
+
+            .botoes {
+                justify-content: center;
+            }
+
+            .documento {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .botoes button {
+                flex: 1;
+                min-width: 70px;
+            }
+
+            .pagina {
+                padding: 0 10px;
+                margin-top: 15px;
+            }
+
+            .documento {
+                padding: 20px 15px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-    <!-- BARRA DE ACESSIBILIDADE FIXA NO TOPO -->
-    <header class="barracao-acessibilidade" role="banner">
-        <div class="acessibilidade-container">
-            <span class="acessibilidade-label" id="label-acessibilidade">Acessibilidade:</span>
-            <div class="botoes-acessibilidade" role="toolbar" aria-labelledby="label-acessibilidade">
-                <button type="button" id="btn-contraste" aria-pressed="false" aria-label="Alternar Alto Contraste">
-                    🌗 Alto Contraste
-                </button>
-                <button type="button" id="btn-aumentar-texto" aria-label="Aumentar tamanho do texto">
+    <!-- BARRA DE ACESSIBILIDADE -->
+    <nav class="acessibilidade" aria-label="Ferramentas de acessibilidade">
+
+        <div class="acessibilidade-conteudo">
+
+            <span class="acessibilidade-titulo">
+                ♿ Recursos de acessibilidade
+            </span>
+
+            <div class="botoes">
+
+                <button
+                    type="button"
+                    onclick="aumentarFonte()"
+                    aria-label="Aumentar tamanho da fonte">
                     A+
                 </button>
-                <button type="button" id="btn-diminuir-texto" aria-label="Diminuir tamanho do texto">
-                    A-
+
+                <button
+                    type="button"
+                    onclick="diminuirFonte()"
+                    aria-label="Diminuir tamanho da fonte">
+                    A−
                 </button>
+
+                <button
+                    type="button"
+                    onclick="contraste()"
+                    id="botaoContraste"
+                    aria-pressed="false"
+                    aria-label="Ativar modo de alto contraste">
+                    ◐ Contraste
+                </button>
+
+                <button
+                    type="button"
+                    onclick="resetar()"
+                    aria-label="Restaurar configurações de acessibilidade">
+                    ↺ Normal
+                </button>
+
             </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main class="main-container" id="conteudo-principal">
-        <header class="doc-header">
-            <div class="repo-tag">REPOSITÓRIO: estudoDaVisão | MÓDULO DE PATOLOGIAS E ÓTICA OCULAR</div>
-            <h1>O Impacto do Glaucoma na Visão: Fisiopatologia e Alterações no Campo Visual</h1>
-            <div class="subtitle">Análise da dinâmica dos fluidos intraoculares, danos ao nervo ótico e reflexos na acuidade visual periférica</div>
-            <div class="meta-info">
-                <strong>Disciplina:</strong> Física Ótica e Fisiologia Ocular &nbsp;|&nbsp; 
-                <strong>Formato:</strong> Artigo Técnico-Científico &nbsp;|&nbsp; 
-                <strong>Data:</strong> Julho de 2026
-            </div>
-        </header>
 
-        <section class="abstract-box" aria-label="Resumo do Artigo">
-            <h2 class="abstract-title">Resumo / Abstract</h2>
-            <p class="no-indent">
-                Este relatório aborda a fisiopatologia do glaucoma, uma neuropatia ótica progressiva frequentemente associada à elevação da pressão intraocular (PIO). O estudo detalha a dinâmica do humor aquoso, os mecanismos de dano às células ganglionares da retina e a subsequente escavação do disco ótico. O artigo categoriza os principais tipos de glaucoma (ângulo aberto e ângulo fechado) e explora o seu impacto no campo visual do paciente, desde a perda de visão periférica até à cegueira irreversível. Discutem-se também os métodos diagnósticos e as abordagens terapêuticas disponíveis na oftalmologia moderna para a estabilização da doença.
-            </p>
-            <div class="keywords">Palavras-chave: Glaucoma; Pressão Intraocular (PIO); Nervo Ótico; Humor Aquoso; Campo Visual; Cegueira Irreversível.</div>
-        </section>
+    <!-- DOCUMENTO -->
+    <main class="pagina">
 
-        <section>
-            <h2>1. Introdução</h2>
-            <p>
-                O glaucoma não é uma doença única, mas sim um grupo de neuropatias óticas caracterizadas pela degeneração progressiva das células ganglionares da retina e dos seus axônios, que formam o nervo ótico. Trata-se da principal causa de cegueira irreversível no mundo. Muitas vezes referido como o "ladrão silencioso da visão", o glaucoma nas suas fases iniciais é tipicamente assintomático, manifestando prejuízos notáveis na capacidade ótica apenas em estágios avançados, quando o dano neuronal já é extenso.
-            </p>
-        </section>
+        <article class="documento">
 
-        <section>
-            <h2>2. Fisiologia Ocular e Dinâmica do Humor Aquoso</h2>
-            <p>
-                O globo ocular mantém o seu formato e o seu tónus devido à presença de fluidos internos, destacando-se o <strong>humor aquoso</strong> na câmara anterior. A integridade ótica e a saúde do nervo dependem do equilíbrio entre a produção e a drenagem deste fluido, o que determina a <strong>Pressão Intraocular (PIO)</strong>.
-            </p>
-            <ul>
-                <li><strong>Produção:</strong> O humor aquoso é secretado continuamente pelo corpo ciliar, localizado atrás da íris.</li>
-                <li><strong>Drenagem:</strong> O fluido flui pela pupila para a câmara anterior e é drenado primariamente pela malha trabecular, no ângulo de drenagem formado pelo encontro entre a córnea e a íris.</li>
-            </ul>
-            <p>
-                Em um olho saudável, a PIO varia geralmente entre 10 e 21 mmHg. Quando ocorre uma resistência anômala à drenagem, o humor aquoso acumula-se, elevando a pressão e gerando estresse mecânico e isquêmico sobre a cabeça do nervo ótico.
-            </p>
-        </section>
+            <header class="cabecalho">
 
-        <section>
-            <h2>3. Classificação Clínica do Glaucoma</h2>
-            <p>
-                As variações do glaucoma são tipicamente classificadas de acordo com a anatomia do ângulo de drenagem da câmara anterior:
-            </p>
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th scope="col">Tipo de Glaucoma</th>
-                            <th scope="col">Características Fisiopatológicas</th>
-                            <th scope="col">Sintomatologia</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Ângulo Aberto (Crônico)</strong></td>
-                            <td>O ângulo de drenagem está anatomicamente aberto, mas a malha trabecular perde eficiência ao longo do tempo. É o tipo mais comum (cerca de 90% dos casos).</td>
-                            <td>Assintomático nas fases iniciais. Perda insidiosa e lenta da visão periférica.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Ângulo Fechado (Agudo)</strong></td>
-                            <td>A íris projeta-se para a frente, blocking fisicamente o ângulo de drenagem. A PIO sobe abruptamente.</td>
-                            <td>Emergência médica. Dor ocular intensa, rubor, visão turva, halos ao redor de luzes, náuseas.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Pressão Normal (Normotensivo)</strong></td>
-                            <td>Dano ao nervo ótico ocorre mesmo com a PIO dentro da normalidade estatística (&lt; 21 mmHg).</td>
-                            <td>Semelhante ao ângulo aberto. Relacionado à hipoperfusão sanguínea do nervo.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Congênito / Secundário</strong></td>
-                            <td>Ocorre por má-formação ocular no útero (congênito) ou em decorrência de traumas, uso prolongado de corticosteroides ou inflamações crônicas.</td>
-                            <td>No congênito: fotofobia, lacrimejamento e olhos aumentados (buftalmo).</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+                <span class="identificacao">
+                    Documento Acadêmico
+                </span>
 
-        <section>
-            <h2>4. Impacto Ótico e Progressão da Perda Visual</h2>
-            <p>
-                Do ponto de vista ótico e percetivo, o glaucoma afeta o processamento da imagem ao interromper a transmissão dos impulsos luminosos captados pela retina para o córtex occipital. O padrão de perda visual no glaucoma é altamente previsível:
-            </p>
-            <ol>
-                <li><strong>Fase Inicial:</strong> Surgem pequenos escotomas (pontos cegos) na periferia do campo de visão, frequentemente impercetíveis no dia a dia devido à compensação visual feita pelo outro olho e pelo cérebro.</li>
-                <li><strong>Fase Intermediária:</strong> Os escotomas coalescem, formando áreas arqueadas de cegueira periférica. O paciente começa a esbarrar em objetos laterais.</li>
-                <li><strong>Fase Avançada (Visão Tubular):</strong> O campo visual reduz-se a uma pequena ilha central de visão, assemelhando-se à sensação de olhar através de um tubo estreito.</li>
-                <li><strong>Fase Terminal:</strong> Destruição total das fibras nervosas, culminando em amaurose (cegueira total).</li>
-            </ol>
+                <h1>
+                    A Importância da Acessibilidade Digital
+                </h1>
 
-            <aside class="callout" aria-label="Métodos Diagnósticos">
-                <div class="callout-title">🔬 Métodos Diagnósticos na Prática Oftalmológica</div>
-                <p class="no-indent">
-                    A prevenção da cegueira por glaucoma depende do diagnóstico precoce. Os principais exames incluem:
-                    <br>• <strong>Tonometria:</strong> Medição da pressão intraocular.
-                    <br>• <strong>Oftalmoscopia e Retinografia:</strong> Avaliação direta do nervo ótico para verificar o aumento da relação escavação/disco.
-                    <br>• <strong>Campimetria (Campo Visual):</strong> Mapeamento computorizado da visão periférica e central.
-                    <br>• <strong>Tomografia de Coerência Ótica (OCT):</strong> Exame de alta resolução que mede a espessura da camada de fibras nervosas da retina, detetando danos microscópicos antes que haja perda de campo visual.
+                <p class="subtitulo sem-recuo">
+                    Tecnologia, inclusão e igualdade no acesso à informação
                 </p>
-            </aside>
-        </section>
 
-        <section>
-            <h2>5. Considerações Finais</h2>
-            <p>
-                Diferente das ametropias (miopia, hipermetropia) que podem ser corrigidas com lentes, ou da catarata cuja reversão é cirúrgica, os danos neurológicos causados pelo glaucoma são definitivos. O tratamento — realizado por meio de colírios hipotensores, procedimentos a laser (trabeculoplastia) ou cirurgias de drenagem (trabeculectomia) — visa exclusivamente reduzir a PIO para estagnar a doença. Assim, a educação sobre a saúde ótica e exames de rotina regulares constituem a única linha de defesa eficaz contra esta patologia.
-            </p>
-        </section>
+                <div class="informacoes">
+                    Trabalho acadêmico • 2026
+                </div>
 
-        <footer class="references">
-            <h3>Referências Bibliográficas</h3>
-            <div class="ref-item">AMERICAN ACADEMY OF OPHTHALMOLOGY (AAO). <em>Glaucoma: Basic and Clinical Science Course</em>. São Francisco, CA, 2023.</div>
-            <div class="ref-item">KANSKI, J. J.; BOWLING, B. <em>Oftalmologia Clínica: Uma Abordagem Sistemática</em>. 8. ed. Rio de Janeiro: Elsevier, 2016.</div>
-            <div class="ref-item">WEINREB, R. N.; AUNG, T.; MEDEIROS, F. A. The pathophysiology and treatment of glaucoma: a review. <em>JAMA</em>, v. 311, n. 18, p. 1901-1911, 2014.</div>
-        </footer>
+            </header>
+
+
+            <!-- RESUMO -->
+            <div class="resumo">
+
+                <div class="resumo-titulo">
+                    RESUMO
+                </div>
+
+                <p class="sem-recuo">
+                    A acessibilidade digital tem como objetivo garantir que
+                    diferentes pessoas possam utilizar tecnologias e acessar
+                    informações de maneira independente. Recursos como
+                    aumento de fonte, alto contraste, navegação por teclado
+                    e leitores de tela contribuem para uma experiência mais
+                    inclusiva.
+                </p>
+
+                <div class="palavras-chave">
+                    Palavras-chave: acessibilidade; inclusão; tecnologia;
+                    informação; cidadania.
+                </div>
+
+            </div>
+
+
+            <!-- INTRODUÇÃO -->
+            <section>
+
+                <h2>1. Introdução</h2>
+
+                <p>
+                    A evolução das tecnologias digitais modificou
+                    significativamente a maneira como as pessoas estudam,
+                    trabalham, comunicam-se e acessam informações.
+                    Entretanto, para que esses benefícios sejam realmente
+                    democráticos, é necessário considerar as diferentes
+                    necessidades dos usuários.
+                </p>
+
+                <p>
+                    Nesse contexto, a acessibilidade digital representa um
+                    elemento fundamental para a construção de ambientes
+                    virtuais mais inclusivos e fáceis de utilizar.
+                </p>
+
+            </section>
+
+
+            <!-- IMPORTÂNCIA -->
+            <section>
+
+                <h2>2. Importância da acessibilidade</h2>
+
+                <p>
+                    Um ambiente digital acessível permite que pessoas com
+                    diferentes características e limitações possam navegar,
+                    compreender conteúdos e interagir com sistemas.
+                </p>
+
+                <div class="destaque">
+
+                    <strong>Informação importante:</strong>
+
+                    <p class="sem-recuo">
+                        A acessibilidade não beneficia somente pessoas com
+                        deficiência. Interfaces claras, textos legíveis e
+                        controles bem identificados podem melhorar a
+                        experiência de todos os usuários.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- RECURSOS -->
+            <section>
+
+                <h2>3. Recursos de acessibilidade</h2>
+
+                <h3>3.1 Ajuste do tamanho da fonte</h3>
+
+                <p>
+                    A possibilidade de ampliar ou reduzir o tamanho do texto
+                    facilita a leitura e permite que cada usuário encontre
+                    uma configuração visual adequada às suas necessidades.
+                </p>
+
+                <h3>3.2 Alto contraste</h3>
+
+                <p>
+                    O alto contraste aumenta a diferença visual entre o
+                    texto e o fundo. Esse recurso pode facilitar a leitura
+                    de pessoas que apresentam dificuldades de percepção
+                    visual.
+                </p>
+
+                <h3>3.3 Navegação simples</h3>
+
+                <p>
+                    Botões identificados de maneira clara, organização
+                    consistente e estrutura lógica tornam a navegação mais
+                    previsível e acessível.
+                </p>
+
+            </section>
+
+
+            <!-- TABELA -->
+            <section>
+
+                <h2>4. Exemplos de recursos</h2>
+
+                <div class="tabela-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Recurso</th>
+                                <th>Objetivo</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Aumento da fonte</td>
+                                <td>Facilitar a leitura dos textos.</td>
+                            </tr>
+
+                            <tr>
+                                <td>Alto contraste</td>
+                                <td>Melhorar a percepção visual.</td>
+                            </tr>
+
+                            <tr>
+                                <td>Teclado</td>
+                                <td>Permitir navegação sem mouse.</td>
+                            </tr>
+
+                            <tr>
+                                <td>Leitor de tela</td>
+                                <td>Converter conteúdo visual em áudio.</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- CONCLUSÃO -->
+            <section>
+
+                <h2>5. Conclusão</h2>
+
+                <p>
+                    A acessibilidade digital deve ser considerada desde o
+                    desenvolvimento de páginas, sistemas e documentos.
+                    Pequenas funcionalidades, como controles para tamanho
+                    da fonte e contraste, podem contribuir para tornar uma
+                    interface significativamente mais inclusiva.
+                </p>
+
+                <p>
+                    Dessa forma, desenvolver ambientes digitais acessíveis
+                    representa não apenas uma preocupação técnica, mas
+                    também uma prática de inclusão e cidadania.
+                </p>
+
+            </section>
+
+
+            <!-- REFERÊNCIAS -->
+            <section class="referencias">
+
+                <h2>Referências</h2>
+
+                <p class="referencia">
+                    WORLD WIDE WEB CONSORTIUM. Web Content Accessibility
+                    Guidelines (WCAG). W3C.
+                </p>
+
+                <p class="referencia">
+                    BRASIL. Lei Brasileira de Inclusão da Pessoa com
+                    Deficiência. Lei nº 13.146, de 6 de julho de 2015.
+                </p>
+
+                <p class="referencia">
+                    ORGANIZAÇÃO DAS NAÇÕES UNIDAS. Convenção sobre os
+                    Direitos das Pessoas com Deficiência.
+                </p>
+
+            </section>
+
+        </article>
+
     </main>
 
-    <script src="script.js" defer></script>
+
+    <!-- JAVASCRIPT DA ACESSIBILIDADE -->
+    <script>
+
+        let tamanhoFonte = 100;
+
+        function aumentarFonte() {
+
+            if (tamanhoFonte < 140) {
+
+                tamanhoFonte += 10;
+
+                document.documentElement.style.fontSize =
+                    tamanhoFonte + "%";
+            }
+        }
+
+
+        function diminuirFonte() {
+
+            if (tamanhoFonte > 80) {
+
+                tamanhoFonte -= 10;
+
+                document.documentElement.style.fontSize =
+                    tamanhoFonte + "%";
+            }
+        }
+
+
+        function contraste() {
+
+            const corpo = document.body;
+            const botao = document.getElementById("botaoContraste");
+
+            corpo.classList.toggle("alto-contraste");
+
+            const ativado =
+                corpo.classList.contains("alto-contraste");
+
+            botao.setAttribute("aria-pressed", ativado);
+
+        }
+
+
+        function resetar() {
+
+            tamanhoFonte = 100;
+
+            document.documentElement.style.fontSize = "100%";
+
+            document.body.classList.remove("alto-contraste");
+
+            document
+                .getElementById("botaoContraste")
+                .setAttribute("aria-pressed", "false");
+
+        }
+
+    </script>
+
 </body>
 </html>
