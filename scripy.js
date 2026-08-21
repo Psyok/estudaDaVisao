@@ -3,48 +3,68 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnAumentar = document.getElementById("btn-aumentar-texto");
     const btnDiminuir = document.getElementById("btn-diminuir-texto");
 
-    const PASSO_FONTE = 10;
-    const FONTE_MAXIMA = 150;
-    const FONTE_MINIMA = 80;
+    const PASSO = 10;
+    const MAX_FONTE = 150;
+    const MIN_FONTE = 80;
 
-    // Carrega e aplica as preferências salvas no localStorage
-    let tamanhoAtualFonte = parseInt(localStorage.getItem("tamanhoFonte")) || 100;
-    const altoContrasteAtivo = localStorage.getItem("altoContraste") === "true";
+    // Leitura e escrita seguras para evitar travamento em arquivos locais ou iframes
+    function lerArmazenamento(chave) {
+        try {
+            return localStorage.getItem(chave);
+        } catch (e) {
+            return null;
+        }
+    }
 
-    document.documentElement.style.fontSize = `${tamanhoAtualFonte}%`;
+    function salvarArmazenamento(chave, valor) {
+        try {
+            localStorage.setItem(chave, valor);
+        } catch (e) {
+            // Ignora o bloqueio de gravação sem interromper o script
+        }
+    }
 
-    if (altoContrasteAtivo) {
+    // Aplicação do tamanho inicial do texto
+    let tamanhoAtual = parseInt(lerArmazenamento("tamanhoFonte")) || 100;
+    
+    function atualizarFonte(novoTamanho) {
+        tamanhoAtual = novoTamanho;
+        document.documentElement.style.fontSize = `${tamanhoAtual}%`;
+        salvarArmazenamento("tamanhoFonte", tamanhoAtual);
+    }
+
+    atualizarFonte(tamanhoAtual);
+
+    // Aplicação do estado de alto contraste inicial
+    const contrasteAtivo = lerArmazenamento("altoContraste") === "true";
+    if (contrasteAtivo) {
         document.body.classList.add("alto-contraste");
         if (btnContraste) btnContraste.setAttribute("aria-pressed", "true");
     }
 
-    // Alternar Alto Contraste
+    // --- EVENTO 1: ALTO CONTRASTE ---
     if (btnContraste) {
         btnContraste.addEventListener("click", () => {
             const estaAtivo = document.body.classList.toggle("alto-contraste");
             btnContraste.setAttribute("aria-pressed", estaAtivo.toString());
-            localStorage.setItem("altoContraste", estaAtivo);
+            salvarArmazenamento("altoContraste", estaAtivo);
         });
     }
 
-    // Aumentar Tamanho da Fonte
+    // --- EVENTO 2: AUMENTAR FONTE ---
     if (btnAumentar) {
         btnAumentar.addEventListener("click", () => {
-            if (tamanhoAtualFonte < FONTE_MAXIMA) {
-                tamanhoAtualFonte += PASSO_FONTE;
-                document.documentElement.style.fontSize = `${tamanhoAtualFonte}%`;
-                localStorage.setItem("tamanhoFonte", tamanhoAtualFonte);
+            if (tamanhoAtual < MAX_FONTE) {
+                atualizarFonte(tamanhoAtual + PASSO);
             }
         });
     }
 
-    // Diminuir Tamanho da Fonte
+    // --- EVENTO 3: DIMINUIR FONTE ---
     if (btnDiminuir) {
         btnDiminuir.addEventListener("click", () => {
-            if (tamanhoAtualFonte > FONTE_MINIMA) {
-                tamanhoAtualFonte -= PASSO_FONTE;
-                document.documentElement.style.fontSize = `${tamanhoAtualFonte}%`;
-                localStorage.setItem("tamanhoFonte", tamanhoAtualFonte);
+            if (tamanhoAtual > MIN_FONTE) {
+                atualizarFonte(tamanhoAtual - PASSO);
             }
         });
     }
